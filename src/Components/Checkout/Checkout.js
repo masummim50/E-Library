@@ -1,20 +1,37 @@
+import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { UserContext } from '../../App';
 
 const Checkout = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const [content, setContent] = useState(false);
   const [book, setBook] = useState([])
   const {id}= useParams();
   console.log(id)
   useEffect(()=> {
     fetch(`http://localhost:5000/book/${id}`)
     .then(res => res.json())
-    .then(data => {setBook(data)})
+    .then(data => {setBook(data); setContent(true)})
   },[])
+  const handleCheckOut = (e)=> {
+    let date = new Date();
+    const {bookName, bookPrice, author, bookDescription, image} = book;
+    const newOrder = {bookName, bookPrice, author, bookDescription, image, orderby: loggedInUser.email, orderDate: date.toDateString(), orderName: loggedInUser.name}
+    console.log(newOrder);
+    axios.post('http://localhost:5000/orders', newOrder)
+    .then(res => {
+      e.target.parentNode.parentNode.innerHTML = res.data
+    })
+  }
   return (
+    <div className="text-center">
+      <h2 className="text-left">Checkout</h2>
+      {!content && <div className="spinner-border text-success" role="status">
+            <span className="visually-hidden"></span>
+        </div>}
+      {content && 
     <div className="container p-5">
-      <h2>Checkout</h2>
       <table className="table">
         <thead><tr className="text-center">
           <th scope="col">Book Name</th>
@@ -33,8 +50,9 @@ const Checkout = () => {
           </tr></tbody>
       </table>
       <div className="btn-container text-right w-100">
-        <button className="btn btn-success">Checkout</button>
+        <button onClick={handleCheckOut} className="btn btn-success">Checkout</button>
       </div>
+    </div>}
     </div>
   );
 };

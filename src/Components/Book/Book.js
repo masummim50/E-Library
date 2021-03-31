@@ -5,7 +5,7 @@ const Book = ({book}) => {
   return (
     <div className="col mb-2">
     <div className="card h-auto">
-      <div style={{height:'300px'}} className="img-container text-center w-100"><img src={book.image} className="h-auto card-img-top w-75" alt="..."></img>
+      <div style={{height:'300px'}} className="img-container text-center w-100 p-2"><img style={{maxWidth:'100%', width:'auto'}} src={book.image} className="h-100 card-img-top" alt="..."></img>
       </div>
       <div className="card-body">
         <h5 className="card-title">{book.bookName}</h5>

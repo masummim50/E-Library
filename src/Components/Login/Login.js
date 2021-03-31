@@ -18,7 +18,8 @@ const Login = () => {
         firebase.auth()
         .signInWithPopup(googleProvider)
         .then((result) => {
-          const newUser = {name: result.user.displayName, email: result.user.email}
+          console.log(result.user)
+          const newUser = {name: result.user.displayName, email: result.user.email, photo: result.user.photoURL}
           setLoggedInUser(newUser)
           history.replace(from)
         }).catch((error) => {
@@ -26,8 +27,7 @@ const Login = () => {
       });
   }
   return (
-    <div>
-      <h2>this is login page</h2>
+    <div className="d-flex align-items-center justify-content-center mt-5">
       <button onClick={handleGoogleSignIn} className="btn btn-danger">Sign in with gmail</button>
     </div>
   );

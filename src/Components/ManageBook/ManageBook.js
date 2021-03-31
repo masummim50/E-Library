@@ -16,7 +16,7 @@ const ManageBook = () => {
       method: 'DELETE'
     })
     .then(res => res.json())
-    .then(data => event.target.parentNode.innerHTML = data)
+    .then(data => event.target.parentNode.innerHTML = '')
     
   }
   return (
