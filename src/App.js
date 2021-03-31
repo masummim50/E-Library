@@ -13,6 +13,8 @@ import ManageBook from './Components/ManageBook/ManageBook';
 import Checkout from './Components/Checkout/Checkout';
 import Login from './Components/Login/Login';
 import { createContext, useState } from 'react';
+import PirvateRoute from './Components/PrivateRoute/PirvateRoute';
+import Orders from './Components/Orders/Orders';
 
 export const UserContext =  createContext();
 function App() {
@@ -25,15 +27,18 @@ function App() {
         <Route exact path='/'>
           <Home></Home>
         </Route>
-        <Route path='/addbooks'>
+        <PirvateRoute path='/addbooks'>
           <AddProduct></AddProduct>
-        </Route>
-        <Route path='/managebooks'>
+        </PirvateRoute>
+        <PirvateRoute path='/managebooks'>
           <ManageBook></ManageBook>
-        </Route>
-        <Route path='/checkout/:id'>
+        </PirvateRoute>
+        <PirvateRoute path='/checkout/:id'>
           <Checkout></Checkout>
-        </Route>
+        </PirvateRoute>
+        <PirvateRoute path='/orders'>
+          <Orders></Orders>
+        </PirvateRoute>
         <Route path='/login'>
           <Login></Login>
         </Route>

@@ -26,6 +26,7 @@ const Header = () => {
               <li className="nav-item ms-3">
                 <Link to='/managebooks' className="nav-link">Manage Books</Link>
               </li>
+              {loggedInUser.email&& <li className="nav-item ms-3"><Link to='/orders' className="nav-link">Orders</Link></li> }
               <li className="nav-item ms-3">
                 <Link to='/login' className="nav-link" tabIndex="-1" a>Login</Link>
               </li>
