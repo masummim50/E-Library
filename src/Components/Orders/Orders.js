@@ -7,7 +7,7 @@ const Orders = () => {
   const [spinner, setSpinner] = useState(false)
   useEffect(()=> {
     setSpinner(true)
-    fetch(`http://localhost:5000/orders/${loggedInUser.email}`)
+    fetch(`https://strawberry-pie-28899.herokuapp.com/orders/${loggedInUser.email}`)
     .then(res => res.json())
     .then(data => {
       setOrderedBook(data);
@@ -30,8 +30,8 @@ const Orders = () => {
           <img style={{height:'150px'}}  src={singleorder.image} alt=""/>
           <div className="book-info d-flex m-2 flex-column">
             <h4 style={{margin:'0'}}>{singleorder.bookName}</h4>
-            <p style={{margin:'0'}}>{singleorder.author}</p>
-            <p style={{margin:'0'}}>Cost: {singleorder.bookPrice}</p>
+            <p style={{margin:'0'}}>Author: {singleorder.author}</p>
+            <p style={{margin:'0'}}>Cost: ${singleorder.bookPrice}</p>
             <p>Order placed on: {singleorder.orderDate}</p>
           </div>
           <button style={{marginLeft:'auto'}} className="btn h-50 btn-danger">Cancel Order</button>

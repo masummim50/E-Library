@@ -6,11 +6,11 @@ import './Header.css'
 const Header = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   return (
-    <header className="sticky-top">
+    <header className="sticky-top bg-success text-white">
     <div className="container">
       <nav className="navbar navbar-expand-lg navbar-light">
-        <div className="container-fluid">
-          <Link className="navbar-brand w-50" to='/'>
+        <div className="container-fluid text-white">
+          <Link className="text-white navbar-brand w-50" to='/'>
             <h2 className="text-left">E-Library</h2>
             <p>Books of world at hand</p>
           </Link>
@@ -20,12 +20,12 @@ const Header = () => {
           <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul className="navbar-nav d-flex align-items-center justify-content-center">
               <li className="nav-item ms-3">
-                <Link className="nav-link active" aria-current="page" to='/'>Home</Link>
+                <Link className="text-white nav-link active" aria-current="page" to='/'>Home</Link>
               </li>
-              {loggedInUser.email&& <li className="nav-item ms-3"><Link to='/orders' className="nav-link">Orders</Link></li> }
+              {loggedInUser.email&& <li className="nav-item ms-3"><Link to='/orders' className="text-white nav-link">Orders</Link></li> }
               {loggedInUser.email && 
               <li className="nav-item ms-3 dropdown">
-                <Link className="nav-link" to='/addbooks'>
+                <Link className="text-white nav-link" to='/addbooks'>
                   Admin
                 <div class="dropdown-content">
                   <li className="nav-item ms-3">
@@ -39,8 +39,8 @@ const Header = () => {
               </li>}
               
               {
-                loggedInUser.email ? <li className="nav-item ms-3"><Link className="nav-link" to='/'><img style={{width:'33px', borderRadius:'50%'}} src={loggedInUser.photo} alt=""/></Link></li> : <li className="nav-item ms-3">
-                <Link to='/login' className="nav-link" tabIndex="-1" a>Login</Link>
+                loggedInUser.email ? <li className="nav-item ms-3"><Link className="text-white nav-link" to='/'><img style={{width:'33px', borderRadius:'50%'}} src={loggedInUser.photo} alt=""/></Link></li> : <li className="nav-item ms-3">
+                <Link to='/login' className="text-white nav-link" tabIndex="-1" a>Login</Link>
               </li>
               }
             </ul>

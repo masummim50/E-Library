@@ -3,6 +3,7 @@ import React from 'react';
 import { useState } from 'react';
 
 const AddProduct = () => {
+  const [bookAdded, setBookAdded] = useState(false)
   const [spinner, setSpinner] = useState(false);
   const [imageurl, setImageurl] = useState('');
   const handleimageupload = (e)=> {
@@ -17,8 +18,15 @@ const AddProduct = () => {
       setSpinner(false)
     })
   }
+  const setEmptyValue = ()=> {
+    document.getElementById('name').value = ''
+    document.getElementById('author').value = ''
+    document.getElementById('price').value = ''
+    document.getElementById('description').value =''
+    document.getElementById('img').value = ''
+  }
   const handleSubmit = ()=> {
-    const bookName = document.getElementById('name').value;
+    let bookName = document.getElementById('name').value;
     const authorName = document.getElementById('author').value;
     const price = document.getElementById('price').value;
     const description = document.getElementById('description').value;
@@ -31,13 +39,20 @@ const AddProduct = () => {
       image: imageurl
     }
     console.log(newBook)
-    fetch('http://localhost:5000/addbook', {
+    fetch('https://strawberry-pie-28899.herokuapp.com/addbook', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(newBook)
-    }).then(res => console.log(res))
+    }).then(res => {
+      console.log(res);
+      setBookAdded(true)
+      setEmptyValue()
+      setTimeout(() => {
+        setBookAdded(false)
+      }, 2000);
+    })
+    
   }
-  const lorem = `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`;
   return (
     <div>
       <div className="container mt-2 p-3">
@@ -46,12 +61,13 @@ const AddProduct = () => {
           <input className="form-control w-50 mb-2" required type="text" placeholder="Book Name" id="name"/>
           <input type="text" id="author" required className="form-control w-50 mb-2" placeholder="Author Name"/>
           <input className="form-control w-50 mb-2" required type="number" name="price" id="price" placeholder="Book Price"/>
-          <textarea defaultValue={lorem} style={{height:'100px'}} className="form-control w-50 mb-2" type="text" name="description" id="description" placeholder="Something about this book"></textarea>
+          <textarea style={{height:'100px'}} className="form-control w-50 mb-2" type="text" name="description" id="description" placeholder="Something about this book"></textarea>
           <input onChange={handleimageupload} required type="file" name="image" id="img" className="form-control w-50 mb-2"/>
           
           {spinner ? <div className="spinner-border" role="status">
               <span className="visually-hidden"></span>
                   </div> : <button onClick={handleSubmit} className="btn btn-info form-control w-50">Add book</button>}
+                  {bookAdded && <h2 className='text-success'>Book Added successfully</h2>}
         </div>
       </div>
       

@@ -6,13 +6,12 @@ const Home = () => {
   const [allbooks, setAllbooks] = useState([]);
   useEffect(()=> {
     setSpinner(true)
-    fetch('http://localhost:5000/allbooks')
+    fetch('https://strawberry-pie-28899.herokuapp.com/allbooks')
     .then(res => res.json())
     .then(data => {setAllbooks(data); setSpinner(false)})
   },[])
   return (
     <div>
-      <h2>this is home page {allbooks.length}</h2>
       <div className="container">
         <div className="text-center mt-5 mb-5">
         {spinner && <div className="spinner-border text-success" role="status">
